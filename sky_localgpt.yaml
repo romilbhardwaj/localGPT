@@ -1,3 +1,4 @@
+# Run localGPT on your documents on any cloud using SkyPilot
 # Usage:
 #   sky launch -c mycluster sky_localgpt.yaml
 #   * Wait to see INFO:werkzeug:Press CTRL+C to quit before proceeding
