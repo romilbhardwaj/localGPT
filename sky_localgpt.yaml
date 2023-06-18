@@ -1,0 +1,38 @@
+# Usage:
+#   sky launch -c mycluster sky_localgpt.yaml
+#   * Wait to see INFO:werkzeug:Press CTRL+C to quit before proceeding
+#   * ssh -L 5111:localhost:5111 mycluster
+#   * Open localhost:5111 in your browser
+# If you want IP address to directly access without port forwarding, run:
+#   host_name="mycluster" && grep -A1 "Host $host_name" ~/.ssh/config | awk '/HostName/ {print $2}'
+resources:
+  cloud: gcp
+  accelerators: A100:1
+
+setup: |
+  . $(conda info --base)/etc/profile.d/conda.sh
+  conda activate py38
+  if [ $? -eq 0 ]; then
+    echo "conda env exists"
+  else
+    conda create -y -n py38 python=3.8
+    conda activate py38
+    git clone https://github.com/romilbhardwaj/localGPT.git
+    git checkout skypilot
+    cd localGPT/
+    pip install -r requirements.txt
+    cd ..
+
+    # Install AutoGPTQ
+    git clone https://github.com/PanQiWei/AutoGPTQ.git
+    cd AutoGPTQ
+    git checkout v0.2.2
+    pip install .
+  fi
+
+run: |
+  . $(conda info --base)/etc/profile.d/conda.sh
+  conda activate py38
+  cd localGPT/
+  python run_localGPT_API.py & python localGPTUI/localGPTUI.py
+
