@@ -17,7 +17,7 @@ def home_page():
         if 'user_prompt' in request.form:
             user_prompt = request.form['user_prompt']
             print(f'User Prompt: {user_prompt}')
-            
+
             main_prompt_url = 'http://localhost:5110/api/prompt_route'
             response = requests.post(main_prompt_url, data={'user_prompt': user_prompt})
             print(response.status_code)  # print HTTP response status code for debugging
@@ -44,8 +44,8 @@ def home_page():
                 # Make a GET request to the /api/run_ingest endpoint
             response = requests.get(run_ingest_url)
             print(response.status_code)  # print HTTP response status code for debugging
-            
+
     # Display the form for GET request
     return render_template('home.html', show_response_modal=False, response_dict={'Prompt': 'None','Answer': 'None', 'Sources': [('ewf','wef')]})
 if __name__ == '__main__':
-    app.run(debug=False, port =5111)
+    app.run(debug=False, host='0.0.0.0', port=5111)

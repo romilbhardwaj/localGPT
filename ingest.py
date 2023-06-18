@@ -41,7 +41,7 @@ def load_document_batch(filepaths):
         return (data_list, filepaths)
 
 
-def load_documents(source_dir: str) -> list[Document]:
+def load_documents(source_dir: str):
     # Loads all documents from the source documents directory
     all_files = os.listdir(source_dir)
     paths = []
