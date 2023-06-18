@@ -10,7 +10,6 @@ resources:
   accelerators: A100:1
 
 setup: |
-  . $(conda info --base)/etc/profile.d/conda.sh
   conda activate py38
   if [ $? -eq 0 ]; then
     echo "conda env exists"
@@ -28,13 +27,9 @@ setup: |
     cd AutoGPTQ
     git checkout v0.2.2
     pip install .
-
-    # Add conda activate py38 to .bashrc
-    echo "conda activate py38" >> ~/.bashrc
   fi
 
 run: |
-  . $(conda info --base)/etc/profile.d/conda.sh
   conda activate py38
   cd localGPT/
   python run_localGPT_API.py & python localGPTUI/localGPTUI.py
