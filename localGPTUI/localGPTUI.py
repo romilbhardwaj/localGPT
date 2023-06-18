@@ -35,7 +35,7 @@ def home_page():
             for file in files:
                 print(file.filename)
                 filename = secure_filename(file.filename)
-                file_path = os.path.join('temp', filename)  # replace with your preferred path
+                file_path = os.path.join('/tmp/', filename)  # replace with your preferred path
                 file.save(file_path)
                 with open(file_path, 'rb') as f:
                     response = requests.post(save_document_url, files={'document': f})

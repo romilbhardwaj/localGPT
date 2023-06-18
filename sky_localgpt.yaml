@@ -18,8 +18,8 @@ setup: |
     conda create -y -n py38 python=3.8
     conda activate py38
     git clone https://github.com/romilbhardwaj/localGPT.git
-    git checkout skypilot
     cd localGPT/
+    git checkout skypilot
     pip install -r requirements.txt
     cd ..
 
@@ -28,6 +28,9 @@ setup: |
     cd AutoGPTQ
     git checkout v0.2.2
     pip install .
+
+    # Add conda activate py38 to .bashrc
+    echo "conda activate py38" >> ~/.bashrc
   fi
 
 run: |
